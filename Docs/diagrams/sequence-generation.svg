@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" font-family="-apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/>
+    </marker>
+    <marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fde68a"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="700" fill="#0f172a"/>
+  <text x="40" y="44" fill="#f8fafc" font-size="24" font-weight="700">시퀀스: 한 세대 동안의 호출 흐름과 화면 이벤트</text>
+  <text x="40" y="70" fill="#94a3b8" font-size="13">실선 = 함수 호출 · 노란 점선 = AsyncStream으로 화면에 전달되는 LoopEvent (타임라인 항목 하나와 1:1)</text>
+
+  <!-- lifelines -->
+  <g font-size="14" font-weight="700" fill="#0f172a">
+    <rect x="60" y="95" width="170" height="40" rx="8" fill="#fde68a"/><text x="145" y="121" text-anchor="middle">AppModel (UI)</text>
+    <rect x="320" y="95" width="170" height="40" rx="8" fill="#fecaca"/><text x="405" y="121" text-anchor="middle">RSIEngine</text>
+    <rect x="580" y="95" width="170" height="40" rx="8" fill="#bbf7d0"/><text x="665" y="121" text-anchor="middle">Evaluator</text>
+    <rect x="840" y="95" width="190" height="40" rx="8" fill="#bfdbfe"/><text x="935" y="121" text-anchor="middle">LanguageModel</text>
+  </g>
+  <g stroke="#334155" stroke-width="2" stroke-dasharray="4 4">
+    <line x1="145" y1="135" x2="145" y2="670"/>
+    <line x1="405" y1="135" x2="405" y2="670"/>
+    <line x1="665" y1="135" x2="665" y2="670"/>
+    <line x1="935" y1="135" x2="935" y2="670"/>
+  </g>
+
+  <g font-size="12" fill="#e2e8f0">
+    <!-- start -->
+    <line x1="145" y1="170" x2="405" y2="170" stroke="#cbd5e1" stroke-width="2" marker-end="url(#s)"/>
+    <text x="275" y="162" text-anchor="middle">run(world, model, start, generations)</text>
+    <line x1="405" y1="195" x2="145" y2="195" stroke="#fde68a" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#d)"/>
+    <text x="275" y="187" text-anchor="middle" fill="#fde68a">.started</text>
+
+    <!-- critique -->
+    <line x1="405" y1="235" x2="145" y2="235" stroke="#fde68a" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#d)"/>
+    <text x="275" y="227" text-anchor="middle" fill="#fde68a">.critique(failures)  — "채점 결과 공유 · 실패 N건"</text>
+
+    <!-- revise -->
+    <line x1="405" y1="275" x2="935" y2="275" stroke="#cbd5e1" stroke-width="2" marker-end="url(#s)"/>
+    <text x="670" y="267" text-anchor="middle">revise(policy, failures, attempt)</text>
+    <line x1="935" y1="305" x2="405" y2="305" stroke="#cbd5e1" stroke-width="2" marker-end="url(#s)"/>
+    <text x="670" y="297" text-anchor="middle">(정책 vN+1, ModelTrace)</text>
+    <line x1="405" y1="335" x2="145" y2="335" stroke="#fde68a" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#d)"/>
+    <text x="275" y="327" text-anchor="middle" fill="#fde68a">.proposal(old, new, trace)  — diff 표시</text>
+
+    <!-- evaluate -->
+    <line x1="405" y1="380" x2="665" y2="380" stroke="#cbd5e1" stroke-width="2" marker-end="url(#s)"/>
+    <text x="535" y="372" text-anchor="middle">evaluate(vN+1, world, model)</text>
+    <rect x="770" y="395" width="330" height="120" rx="10" fill="#1e293b" stroke="#334155"/>
+    <text x="935" y="415" text-anchor="middle" fill="#94a3b8">loop × 티켓 12건</text>
+    <line x1="665" y1="440" x2="935" y2="440" stroke="#cbd5e1" stroke-width="2" marker-end="url(#s)"/>
+    <text x="800" y="432" text-anchor="middle">classify(ticket, policy)</text>
+    <line x1="935" y1="470" x2="665" y2="470" stroke="#cbd5e1" stroke-width="2" marker-end="url(#s)"/>
+    <text x="800" y="462" text-anchor="middle">(Prediction, ModelTrace)</text>
+    <text x="935" y="500" text-anchor="middle" fill="#94a3b8">Scripted: 규칙표 / Claude: HTTPS</text>
+    <line x1="665" y1="540" x2="405" y2="540" stroke="#cbd5e1" stroke-width="2" marker-end="url(#s)"/>
+    <text x="535" y="532" text-anchor="middle">TrialResult(score, rows, failures)</text>
+    <line x1="405" y1="570" x2="145" y2="570" stroke="#fde68a" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#d)"/>
+    <text x="275" y="562" text-anchor="middle" fill="#fde68a">.trial(result)  — 티켓별 ✓/−/✗ 표</text>
+
+    <!-- decision -->
+    <rect x="330" y="590" width="150" height="34" rx="6" fill="#334155"/>
+    <text x="405" y="612" text-anchor="middle">new &gt; old ?</text>
+    <line x1="405" y1="650" x2="145" y2="650" stroke="#fde68a" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#d)"/>
+    <text x="275" y="642" text-anchor="middle" fill="#fde68a">.decision(accepted, oldScore, newScore)  — 채택 / 기각</text>
+  </g>
+</svg>

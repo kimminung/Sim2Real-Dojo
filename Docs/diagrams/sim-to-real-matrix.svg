@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="640" viewBox="0 0 1100 640" font-family="-apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#a855f7"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="640" fill="#0f172a"/>
+  <text x="40" y="48" fill="#f8fafc" font-size="26" font-weight="700">Sim-to-Real의 두 축: 환경 × 모델</text>
+  <text x="40" y="76" fill="#94a3b8" font-size="14">같은 정책 텍스트를 네 칸 어디서든 실행할 수 있습니다. 왼쪽 위에서 배우고, 오른쪽 아래로 옮기는 것이 전이(transfer)입니다.</text>
+
+  <!-- axes labels -->
+  <text x="560" y="130" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="700">환경 축 (World)</text>
+  <text x="385" y="160" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="700">Sim · 정제된 티켓 12건</text>
+  <text x="735" y="160" text-anchor="middle" fill="#d8b4fe" font-size="14" font-weight="700">Real · 현장 티켓 12건 (오타·은어)</text>
+  <text x="80" y="330" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="700" transform="rotate(-90 80 330)">모델 축 (Model)</text>
+  <text x="140" y="265" text-anchor="middle" fill="#86efac" font-size="13" font-weight="700" transform="rotate(-90 140 265)">스크립트 모델</text>
+  <text x="140" y="485" text-anchor="middle" fill="#fdba74" font-size="13" font-weight="700" transform="rotate(-90 140 485)">실제 Claude</text>
+
+  <!-- quadrants -->
+  <rect x="210" y="180" width="350" height="190" rx="14" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+  <text x="385" y="215" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="700">① 훈련장</text>
+  <text x="385" y="240" text-anchor="middle" fill="#cbd5e1" font-size="13">결정적·무료·즉시. RSI를 여기서 돌립니다.</text>
+  <text x="385" y="285" text-anchor="middle" fill="#93c5fd" font-size="28" font-weight="700">50% → 100%</text>
+  <text x="385" y="310" text-anchor="middle" fill="#cbd5e1" font-size="12">3세대, 규칙 2개 → 10개</text>
+
+  <rect x="560" y="180" width="350" height="190" rx="14" fill="#3b1e5f" stroke="#a855f7" stroke-width="2"/>
+  <text x="735" y="215" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="700">② 환경 전이</text>
+  <text x="735" y="240" text-anchor="middle" fill="#cbd5e1" font-size="13">같은 모델, 낯선 데이터. 키워드가 안 맞습니다.</text>
+  <text x="735" y="285" text-anchor="middle" fill="#d8b4fe" font-size="28" font-weight="700">67%  (−33%p)</text>
+  <text x="735" y="310" text-anchor="middle" fill="#cbd5e1" font-size="12">"택배"≠"배송", "결재"≠"결제" · Real RSI 2세대 → 100%</text>
+
+  <rect x="210" y="370" width="350" height="190" rx="14" fill="#1e3a2f" stroke="#22c55e" stroke-width="2"/>
+  <text x="385" y="405" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="700">③ 모델 전이</text>
+  <text x="385" y="430" text-anchor="middle" fill="#cbd5e1" font-size="13">같은 데이터, 실제 모델. 규칙표가 system 프롬프트가 됩니다.</text>
+  <text x="385" y="475" text-anchor="middle" fill="#86efac" font-size="20" font-weight="700">의미를 읽는 모델의 점수는?</text>
+  <text x="385" y="500" text-anchor="middle" fill="#cbd5e1" font-size="12">API 키 입력 후 직접 측정 · 호출 JSON 전부 기록</text>
+
+  <rect x="560" y="370" width="350" height="190" rx="14" fill="#5f2e1e" stroke="#f97316" stroke-width="2"/>
+  <text x="735" y="405" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="700">④ 진짜 현장</text>
+  <text x="735" y="430" text-anchor="middle" fill="#cbd5e1" font-size="13">현장 데이터 + 실제 모델. 운영 환경에 가장 가깝습니다.</text>
+  <text x="735" y="475" text-anchor="middle" fill="#fdba74" font-size="20" font-weight="700">Sim→Real 격차의 최종 측정점</text>
+  <text x="735" y="500" text-anchor="middle" fill="#cbd5e1" font-size="12">비용·지연·거절(refusal) 처리까지 경험</text>
+
+  <!-- transfer arrow -->
+  <path d="M470,300 C600,280 700,420 790,440" fill="none" stroke="#a855f7" stroke-width="4" stroke-dasharray="10 6" marker-end="url(#p)"/>
+  <text x="560" y="590" text-anchor="middle" fill="#e2e8f0" font-size="14">전이 보고서 = Sim 점수 − Real 점수. 격차 &lt; 5%p 작음 · &lt; 25%p 보통 · 그 이상 큼 (TransferReport.verdict)</text>
+</svg>

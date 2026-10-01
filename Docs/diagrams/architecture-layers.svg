@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" font-family="-apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="640" fill="#0f172a"/>
+  <text x="40" y="48" fill="#f8fafc" font-size="26" font-weight="700">심투리얼 도장 · 아키텍처 레이어</text>
+  <text x="40" y="76" fill="#94a3b8" font-size="14">화면(App)은 이벤트를 옮겨 적기만 하고, 분류·채점·수정 로직은 전부 Core에 있습니다. 모델은 프로토콜 하나로 교체됩니다.</text>
+
+  <!-- App layer -->
+  <rect x="40" y="100" width="1120" height="150" rx="14" fill="#1e293b" stroke="#334155"/>
+  <text x="60" y="128" fill="#e2e8f0" font-size="16" font-weight="700">App 레이어 · SwiftUI (MyApp/App)</text>
+  <g font-size="13" fill="#0f172a">
+    <rect x="60" y="150" width="200" height="70" rx="10" fill="#bfdbfe"/>
+    <text x="160" y="178" text-anchor="middle" font-weight="700">ControlPanelView</text>
+    <text x="160" y="198" text-anchor="middle">환경·모델·세대·전이 버튼</text>
+    <rect x="280" y="150" width="200" height="70" rx="10" fill="#bfdbfe"/>
+    <text x="380" y="178" text-anchor="middle" font-weight="700">TimelineView</text>
+    <text x="380" y="198" text-anchor="middle">점수 차트 + RSI 이벤트 로그</text>
+    <rect x="500" y="150" width="200" height="70" rx="10" fill="#bfdbfe"/>
+    <text x="600" y="178" text-anchor="middle" font-weight="700">PolicyCodeView</text>
+    <text x="600" y="198" text-anchor="middle">정책 편집 · 소스 열람 · 호출 JSON</text>
+    <rect x="720" y="150" width="200" height="70" rx="10" fill="#bfdbfe"/>
+    <text x="820" y="178" text-anchor="middle" font-weight="700">LearningGuideView</text>
+    <text x="820" y="198" text-anchor="middle">6장 커리큘럼</text>
+    <rect x="940" y="150" width="200" height="70" rx="10" fill="#fde68a"/>
+    <text x="1040" y="178" text-anchor="middle" font-weight="700">AppModel (@Observable)</text>
+    <text x="1040" y="198" text-anchor="middle">LoopEvent → 타임라인·차트</text>
+  </g>
+
+  <line x1="1040" y1="250" x2="1040" y2="290" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1052" y="275" fill="#94a3b8" font-size="12">AsyncStream&lt;LoopEvent&gt;</text>
+
+  <!-- Core layer -->
+  <rect x="40" y="290" width="1120" height="210" rx="14" fill="#1e293b" stroke="#334155"/>
+  <text x="60" y="318" fill="#e2e8f0" font-size="16" font-weight="700">Core 레이어 · 순수 Swift, UI 의존 없음 (MyApp/Core)</text>
+  <g font-size="13" fill="#0f172a">
+    <rect x="60" y="340" width="180" height="60" rx="10" fill="#bbf7d0"/>
+    <text x="150" y="365" text-anchor="middle" font-weight="700">World / Ticket</text>
+    <text x="150" y="385" text-anchor="middle">Sim 12건 · Real 12건</text>
+    <rect x="260" y="340" width="180" height="60" rx="10" fill="#bbf7d0"/>
+    <text x="350" y="365" text-anchor="middle" font-weight="700">Policy / Rule</text>
+    <text x="350" y="385" text-anchor="middle">지시문 텍스트 · 파서 · diff</text>
+    <rect x="460" y="340" width="180" height="60" rx="10" fill="#bbf7d0"/>
+    <text x="550" y="365" text-anchor="middle" font-weight="700">Evaluator</text>
+    <text x="550" y="385" text-anchor="middle">코드 채점 0.5 + 0.5</text>
+    <rect x="660" y="340" width="220" height="60" rx="10" fill="#fecaca"/>
+    <text x="770" y="365" text-anchor="middle" font-weight="700">RSIEngine</text>
+    <text x="770" y="385" text-anchor="middle">실행→채점→수정→판정</text>
+    <rect x="900" y="340" width="240" height="60" rx="10" fill="#e9d5ff"/>
+    <text x="1020" y="365" text-anchor="middle" font-weight="700">TransferReport</text>
+    <text x="1020" y="385" text-anchor="middle">Sim 점수 − Real 점수 = 격차</text>
+
+    <rect x="60" y="420" width="1080" height="60" rx="10" fill="#334155"/>
+    <text x="80" y="445" fill="#e2e8f0" font-weight="700">protocol LanguageModel</text>
+    <text x="80" y="465" fill="#cbd5e1">classify(ticket, policy) · revise(policy, failures, attempt)</text>
+    <rect x="520" y="428" width="280" height="44" rx="8" fill="#bbf7d0"/>
+    <text x="660" y="446" text-anchor="middle" font-weight="700">ScriptedModel (오프라인)</text>
+    <text x="660" y="464" text-anchor="middle">규칙표 실행 · 키워드 규칙 추가</text>
+    <rect x="820" y="428" width="300" height="44" rx="8" fill="#fed7aa"/>
+    <text x="970" y="446" text-anchor="middle" font-weight="700">ClaudeModel (URLSession)</text>
+    <text x="970" y="464" text-anchor="middle">system = 정책 · JSON 응답 파싱</text>
+  </g>
+
+  <line x1="970" y1="500" x2="970" y2="540" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="982" y="525" fill="#94a3b8" font-size="12">HTTPS POST /v1/messages</text>
+
+  <!-- External -->
+  <rect x="40" y="540" width="1120" height="70" rx="14" fill="#1e293b" stroke="#334155"/>
+  <text x="60" y="568" fill="#e2e8f0" font-size="16" font-weight="700">외부 · Anthropic Messages API</text>
+  <text x="60" y="592" fill="#94a3b8" font-size="13">model: claude-opus-5 (기본) · x-api-key는 메모리에만 · 요청/응답 JSON은 ModelTrace로 전부 화면에 기록</text>
+</svg>

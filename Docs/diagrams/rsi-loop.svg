@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="620" viewBox="0 0 1100 620" font-family="-apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#22c55e"/>
+    </marker>
+    <marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f97316"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="620" fill="#0f172a"/>
+  <text x="40" y="48" fill="#f8fafc" font-size="26" font-weight="700">RSI 루프 한 세대 (RSIEngine.run)</text>
+  <text x="40" y="76" fill="#94a3b8" font-size="14">고치는 대상은 정책 텍스트, 점수는 코드가 매기고, 점수가 오를 때만 채택합니다. 나빠지는 변경은 살아남지 못합니다.</text>
+
+  <!-- Policy box -->
+  <rect x="40" y="250" width="200" height="120" rx="14" fill="#fde68a"/>
+  <text x="140" y="290" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">현재 정책 vN</text>
+  <text x="140" y="315" text-anchor="middle" font-size="13" fill="#0f172a">규칙표 = system 프롬프트</text>
+  <text x="140" y="340" text-anchor="middle" font-size="13" fill="#0f172a">+ 현재 점수</text>
+
+  <!-- Step 1 Act -->
+  <rect x="330" y="110" width="220" height="90" rx="12" fill="#bfdbfe"/>
+  <text x="440" y="145" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">① 실행 (Act)</text>
+  <text x="440" y="170" text-anchor="middle" font-size="13" fill="#0f172a">모델이 정책대로 티켓 12건 분류</text>
+  <text x="440" y="188" text-anchor="middle" font-size="12" fill="#334155">LanguageModel.classify</text>
+
+  <!-- Step 2 Score -->
+  <rect x="650" y="110" width="220" height="90" rx="12" fill="#bbf7d0"/>
+  <text x="760" y="145" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">② 채점 (Score)</text>
+  <text x="760" y="170" text-anchor="middle" font-size="13" fill="#0f172a">코드가 점수·실패 사례 산출</text>
+  <text x="760" y="188" text-anchor="middle" font-size="12" fill="#334155">Evaluator.evaluate</text>
+
+  <!-- Step 3 Revise -->
+  <rect x="650" y="400" width="220" height="90" rx="12" fill="#e9d5ff"/>
+  <text x="760" y="435" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">③ 수정 (Revise)</text>
+  <text x="760" y="460" text-anchor="middle" font-size="13" fill="#0f172a">실패 사례를 보고 정책 vN+1 제안</text>
+  <text x="760" y="478" text-anchor="middle" font-size="12" fill="#334155">LanguageModel.revise</text>
+
+  <!-- Step 4 Judge -->
+  <rect x="330" y="400" width="220" height="90" rx="12" fill="#fecaca"/>
+  <text x="440" y="435" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">④ 판정 (Judge)</text>
+  <text x="440" y="460" text-anchor="middle" font-size="13" fill="#0f172a">제안을 재채점, 새 점수 &gt; 옛 점수?</text>
+  <text x="440" y="478" text-anchor="middle" font-size="12" fill="#334155">trial.score &gt; currentTrial.score</text>
+
+  <!-- arrows -->
+  <path d="M240,290 C280,290 300,155 330,155" fill="none" stroke="#64748b" stroke-width="2.5" marker-end="url(#a)"/>
+  <line x1="550" y1="155" x2="650" y2="155" stroke="#64748b" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="600" y="145" text-anchor="middle" fill="#94a3b8" font-size="12">예측 12건</text>
+  <line x1="760" y1="200" x2="760" y2="400" stroke="#64748b" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="775" y="300" fill="#94a3b8" font-size="12">실패 사례 + attempt</text>
+  <line x1="650" y1="445" x2="550" y2="445" stroke="#64748b" stroke-width="2.5" marker-end="url(#a)"/>
+  <text x="600" y="435" text-anchor="middle" fill="#94a3b8" font-size="12">정책 vN+1</text>
+
+  <!-- accept -->
+  <path d="M330,430 C290,430 270,330 240,320" fill="none" stroke="#22c55e" stroke-width="2.5" marker-end="url(#g)"/>
+  <text x="40" y="410" fill="#22c55e" font-size="13" font-weight="700">채택: 정책 교체, attempt = 0</text>
+  <!-- reject -->
+  <path d="M440,490 C440,560 820,580 860,500" fill="none" stroke="#f97316" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#r)"/>
+  <text x="640" y="575" text-anchor="middle" fill="#f97316" font-size="13" font-weight="700">기각: 옛 정책 유지, attempt += 1 → 다음 후보 키워드</text>
+
+  <!-- exit -->
+  <rect x="920" y="110" width="150" height="90" rx="12" fill="#334155"/>
+  <text x="995" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#e2e8f0">조기 종료</text>
+  <text x="995" y="168" text-anchor="middle" font-size="12" fill="#cbd5e1">실패 0건이면</text>
+  <text x="995" y="186" text-anchor="middle" font-size="12" fill="#cbd5e1">루프 중단</text>
+  <line x1="870" y1="155" x2="920" y2="155" stroke="#64748b" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#a)"/>
+</svg>
