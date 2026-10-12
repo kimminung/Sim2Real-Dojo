@@ -1,5 +1,9 @@
 # 심투리얼 도장 (Sim2Real Dojo)
 
+
+https://github.com/user-attachments/assets/668722f1-b00c-4694-b9e9-c575b7276120
+
+
 > Claude 모델의 **Sim-to-Real 전이**와 **RSI(재귀적 자기개선) 루프**를 직원 교육용으로 투명하게 보여 주는 SwiftUI 앱.
 > 화면에서 본 모든 숫자와 결정은 `MyApp/Core/`의 코드에서 그대로 찾을 수 있습니다.
 
